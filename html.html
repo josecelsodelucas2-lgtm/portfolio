@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>José Celso de Lucas | Portfólio & Currículo Interativo</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                        },
+                        darkbg: {
+                            DEFAULT: '#0b1120',
+                            card: '#111827',
+                            lighter: '#1f2937'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Estilos de tela */
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Folha A4 para visualização no site */
+        .a4-container {
+            width: 100%;
+            max-width: 210mm;
+            min-height: 297mm;
+            background: #ffffff;
+            color: #1e293b;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            margin: 0 auto;
+            padding: 16mm 18mm;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* ISOLAMENTO ABSOLUTO PARA IMPRESSÃO / SALVAR PDF */
+        @media print {
+            /* Oculta tudo que não faz parte do currículo */
+            body * {
+                visibility: hidden !important;
+            }
+            /* Exibe estritamente a folha do currículo */
+            #curriculo-a4, #curriculo-a4 * {
+                visibility: visible !important;
+            }
+            #curriculo-a4 {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 10mm 14mm !important;
+                border: none !important;
+                box-shadow: none !important;
+                background: #ffffff !important;
+                color: #0f172a !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-darkbg dark:text-slate-100 transition-colors duration-200 selection:bg-brand-500 selection:text-white">
+
+    <!-- BARRA DE NAVEGAÇÃO -->
+    <header class="sticky top-0 z-40 w-full glass-header bg-white/90 dark:bg-darkbg/90 border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3">
+                <span class="w-9 h-9 rounded-xl bg-brand-500 flex items-center justify-center text-white font-bold font-mono shadow-sm">
+                    JL
+                </span>
+                <div>
+                    <div class="font-bold text-slate-900 dark:text-white leading-tight">José Celso de Lucas</div>
+                    <div class="text-[11px] text-brand-600 dark:text-brand-500 font-mono">ADS &bull; Desenvolvedor TI</div>
+                </div>
+            </a>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a href="#sobre" class="hover:text-brand-500 transition-colors">Sobre</a>
+                <a href="#habilidades" class="hover:text-brand-500 transition-colors">Habilidades</a>
+                <a href="#projetos" class="hover:text-brand-500 transition-colors">Projetos</a>
+                <a href="#trajetoria" class="hover:text-brand-500 transition-colors">Experiência</a>
+                <a href="#curriculo-secao" class="text-brand-600 dark:text-brand-400 font-semibold hover:underline flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-lines"></i> Currículo A4 / PDF
+                </a>
+                <a href="#contato" class="hover:text-brand-500 transition-colors">Contato</a>
+            </nav>
+
+            <!-- Ações -->
+            <div class="flex items-center gap-2">
+                <button id="themeBtn" aria-label="Alternar tema" class="w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-darkbg-lighter flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-brand-500 transition">
+                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+                </button>
+
+                <button onclick="imprimirCurriculo()" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-brand-500 hover:bg-brand-600 text-white font-medium text-xs shadow-sm transition">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Imprimir / Salvar PDF</span>
+                </button>
+
+                <!-- Botão Mobile -->
+                <button id="mobileMenuBtn" class="md:hidden w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden px-4 py-3 bg-white dark:bg-darkbg-card border-b border-slate-200 dark:border-slate-800 space-y-2 text-sm font-medium">
+            <a href="#sobre" class="block py-1.5 hover:text-brand-500">Sobre</a>
+            <a href="#habilidades" class="block py-1.5 hover:text-brand-500">Habilidades</a>
+            <a href="#projetos" class="block py-1.5 hover:text-brand-500">Projetos</a>
+            <a href="#trajetoria" class="block py-1.5 hover:text-brand-500">Experiência</a>
+            <a href="#curriculo-secao" class="block py-1.5 text-brand-500 font-semibold">Currículo A4 / PDF</a>
+            <a href="#contato" class="block py-1.5 hover:text-brand-500">Contato</a>
+            <button onclick="imprimirCurriculo()" class="w-full mt-2 py-2 rounded-lg bg-brand-500 text-white text-xs font-semibold flex items-center justify-center gap-2">
+                <i class="fa-solid fa-print"></i> Imprimir / Salvar PDF
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-20">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="pt-6 sm:pt-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-4">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Disponível para Estágio & Posições Júnior em TI
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight mb-3">
+                Olá, sou <span class="text-brand-500">José Celso de Lucas</span>
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-medium mb-6">
+                Estudante de Análise e Desenvolvimento de Sistemas com foco em <span class="text-slate-900 dark:text-white font-semibold">Java, Python, SQL, JavaScript</span> e Infraestrutura.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3">
+                <a href="#curriculo-secao" class="px-5 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>Ver Currículo A4</span>
+                </a>
+                
+                <button onclick="imprimirCurriculo()" class="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-darkbg-card hover:border-brand-500 font-semibold text-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-print text-brand-500"></i>
+                    <span>Imprimir / Gerar PDF</span>
+                </button>
+
+                <a href="https://github.com/josecelsodelucas2-lgtm" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:text-brand-500 text-lg transition" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+
+                <a href="https://linkedin.com/in/jose-celso-lucas-50b063207" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:text-brand-500 text-lg transition" title="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+
+                <a href="mailto:josecelsodelucas2@gmail.com" class="w-10 h-10 rounded-xl border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:text-brand-500 text-lg transition" title="E-mail">
+                    <i class="fa-regular fa-envelope"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- SOBRE MIM -->
+        <section id="sobre" class="scroll-mt-20">
+            <div class="border-l-4 border-brand-500 pl-3 mb-4">
+                <h2 class="text-xs uppercase font-mono tracking-wider text-brand-500 font-bold">Perfil</h2>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Sobre Mim</h3>
+            </div>
+            <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
+                <p>
+                    Sou estudante de <strong>Análise e Desenvolvimento de Sistemas</strong> pela Faculdade Anhanguera (EAD, previsão de conclusão em dezembro de 2027). Possuo uma base técnica sólida desenvolvida através de projetos acadêmicos e práticos envolvendo programação orientada a objetos, modelagem de banco de dados e aplicações web completas.
+                </p>
+                <p>
+                    Trago também uma bagagem relevante de responsabilidade operacional e controle adquirida em anos de experiência nos setores logístico e fabril (Assaí Atacadista, Lojas Renner e Tower Automotive), o que me proporciona alta disciplina, atenção aos detalhes, resolução rápida de problemas e facilidade de adaptação em ambientes dinâmicos.
+                </p>
+                <div class="pt-2 flex flex-wrap gap-2 text-xs font-semibold">
+                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-darkbg-lighter text-slate-700 dark:text-slate-200">📍 Arujá - SP</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-darkbg-lighter text-slate-700 dark:text-slate-200">🎯 Busca: Estágio / Júnior TI</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-darkbg-lighter text-slate-700 dark:text-slate-200">🗣️ Inglês Técnico</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- HABILIDADES -->
+        <section id="habilidades" class="scroll-mt-20">
+            <div class="border-l-4 border-brand-500 pl-3 mb-6">
+                <h2 class="text-xs uppercase font-mono tracking-wider text-brand-500 font-bold">Competências</h2>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Conhecimentos Técnicos</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Card 1 -->
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fa-solid fa-code"></i></div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-sm">Linguagens</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Java (POO), Python, JavaScript (ES6+), C/C++, SQL
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fa-solid fa-globe"></i></div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-sm">Desenvolvimento Web</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        HTML5 Semântico, CSS3, Tailwind CSS, DOM Manipulation, Web Design Responsivo
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fa-solid fa-database"></i></div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-sm">Bancos de Dados</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        MySQL, Consultas SQL Avançadas, Modelagem ER, Microsoft Access
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fa-solid fa-cloud"></i></div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-sm">Cloud & Ferramentas</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Git & GitHub, Microsoft Azure AI Fundamentals, Power BI, Excel Avançado, Redes
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJETOS -->
+        <section id="projetos" class="scroll-mt-20">
+            <div class="border-l-4 border-brand-500 pl-3 mb-6">
+                <h2 class="text-xs uppercase font-mono tracking-wider text-brand-500 font-bold">Portfólio</h2>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Projetos em Destaque</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Projeto 1 -->
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-mono text-brand-500 font-bold">DASHBOARD &bull; BI</span>
+                            <a href="https://github.com/josecelsodelucas2-lgtm" target="_blank" rel="noopener" class="text-slate-400 hover:text-brand-500"><i class="fa-brands fa-github text-lg"></i></a>
+                        </div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-base mb-2">NexusSales AI | Executive Sales Dashboard</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                            Painel analítico para consolidação e visualização de métricas comerciais, cálculos de margem de lucro e gráficos com visual moderno.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-1.5 text-[11px] font-mono mb-4 text-brand-600 dark:text-brand-400">
+                            <span class="bg-brand-50 dark:bg-darkbg-lighter px-2 py-0.5 rounded">HTML5</span>
+                            <span class="bg-brand-50 dark:bg-darkbg-lighter px-2 py-0.5 rounded">Tailwind</span>
+                            <span class="bg-brand-50 dark:bg-darkbg-lighter px-2 py-0.5 rounded">JavaScript</span>
+                        </div>
+                        <a href="https://github.com/josecelsodelucas2-lgtm" target="_blank" rel="noopener" class="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-500 flex items-center gap-1">
+                            Ver repositório <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projeto 2 -->
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-mono text-brand-500 font-bold">SOFTWARE &bull; VAREJO</span>
+                            <a href="https://github.com/josecelsodelucas2-lgtm" target="_blank" rel="noopener" class="text-slate-400 hover:text-brand-500"><i class="fa-brands fa-github text-lg"></i></a>
+                        </div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-base mb-2">VendaFácil PDV - Sistema de Vendas</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                            Sistema de frente de caixa com controle dinâmico de catálogo, totalização rápida de pedidos, cálculo de troco e persistência de dados.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-1.5 text-[11px] font-mono mb-4 text-brand-600 dark:text-brand-400">
+                            <span class="bg-brand-50 dark:bg-darkbg-lighter px-2 py-0.5 rounded">Java</span>
+                            <span class="bg-brand-50 dark:bg-darkbg-lighter px-2 py-0.5 rounded">JavaScript</span>
+                            <span class="bg-brand-50 dark:bg-darkbg-lighter px-2 py-0.5 rounded">SQL</span>
+                        </div>
+                        <a href="https://github.com/josecelsodelucas2-lgtm" target="_blank" rel="noopener" class="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-500 flex items-center gap-1">
+                            Ver repositório <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projeto 3 -->
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-mono text-brand-500 font-bold">LOGTECH &bull; WMS</span>
+                            <a href="https://github.com/josecelsodelucas2-lgtm" target="_blank" rel="noopener" class="text-slate-400 hover:text-brand-500"><i class="fa-brands fa-github text-lg"></i></a>
+                        </div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-base mb-2">Simulador Coletor WMS (Picking & Carga)</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                            Emulador para simulação de fluxo de separação, conferência de código de barras e validação de expedição logística em armazéns.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-1.5 text-[11px] font-mono mb-4 text-brand-600 dark:text-brand-400">
+                            <span class="bg-brand-50 dark:bg-darkbg-lighter px-2 py-0.5 rounded">HTML5</span>
+                            <span class="bg-brand-50 dark:bg-darkbg-lighter px-2 py-0.5 rounded">JavaScript</span>
+                            <span class="bg-brand-50 dark:bg-darkbg-lighter px-2 py-0.5 rounded">Logística</span>
+                        </div>
+                        <a href="https://github.com/josecelsodelucas2-lgtm" target="_blank" rel="noopener" class="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-500 flex items-center gap-1">
+                            Ver repositório <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRAJETÓRIA PROFISSIONAL -->
+        <section id="trajetoria" class="scroll-mt-20">
+            <div class="border-l-4 border-brand-500 pl-3 mb-6">
+                <h2 class="text-xs uppercase font-mono tracking-wider text-brand-500 font-bold">Histórico</h2>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Experiência Profissional</h3>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+                        <span class="font-bold text-slate-900 dark:text-white text-base">Assaí Atacadista</span>
+                        <span class="text-xs font-mono text-slate-500">Dez/2024 – Atual</span>
+                    </div>
+                    <div class="text-xs font-semibold text-brand-600 dark:text-brand-400 mb-2">Separador / Operador de Logística</div>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Organização, conferência e separação de mercadorias no centro de distribuição, garantindo a integridade dos itens antes da expedição e zelando pelo cumprimento rigoroso de prazos e metas operacionais.
+                    </p>
+                </div>
+
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+                        <span class="font-bold text-slate-900 dark:text-white text-base">Lojas Renner S.A.</span>
+                        <span class="text-xs font-mono text-slate-500">Set/2018 – Abr/2024</span>
+                    </div>
+                    <div class="text-xs font-semibold text-brand-600 dark:text-brand-400 mb-2">Auxiliar de Logística (E-commerce Youcom)</div>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Atuação estratégica na expedição e conferência de pedidos do comércio eletrônico. Realização de auditorias de cargas e alimentação de planilhas para monitoramento e rastreamento de entregas.
+                    </p>
+                </div>
+
+                <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+                        <span class="font-bold text-slate-900 dark:text-white text-base">Tower Automotive</span>
+                        <span class="text-xs font-mono text-slate-500">Dez/2009 – Jun/2014</span>
+                    </div>
+                    <div class="text-xs font-semibold text-brand-600 dark:text-brand-400 mb-2">Operador de Produção Industrial (Robótica)</div>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Alimentação e monitoramento de células automatizadas com robôs de solda para autopeças. Preenchimento de controles e planilhas de fluxo de entradas e saídas na área de expedição.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TERMINAL INTERATIVO CLI -->
+        <section id="terminal" class="scroll-mt-20">
+            <div class="border-l-4 border-brand-500 pl-3 mb-4">
+                <h2 class="text-xs uppercase font-mono tracking-wider text-brand-500 font-bold">Interativo</h2>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Terminal CLI do Candidato</h3>
+            </div>
+            
+            <div class="bg-[#0b1120] border border-slate-700 rounded-2xl overflow-hidden font-mono text-xs shadow-xl">
+                <div class="bg-slate-900 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                        <span class="text-slate-400 text-[11px] ml-2">jose@terminal:~</span>
+                    </div>
+                    <span class="text-slate-500 text-[10px]">bash</span>
+                </div>
+                
+                <div id="cliOutput" class="p-4 space-y-1.5 max-h-56 overflow-y-auto text-slate-300">
+                    <div>Digite <span class="text-yellow-400 font-bold">help</span> para listar os comandos ou clique nos botões abaixo.</div>
+                </div>
+
+                <form id="cliForm" class="flex items-center px-4 py-2.5 bg-slate-950 border-t border-slate-800">
+                    <span class="text-emerald-400 font-bold mr-2">jose@portfolio:~$</span>
+                    <input id="cliInput" type="text" autocomplete="off" placeholder="digite aqui..." class="flex-1 bg-transparent text-white focus:outline-none">
+                    <button type="submit" class="px-2.5 py-1 bg-brand-500 text-white rounded text-[11px] font-bold">Enter</button>
+                </form>
+
+                <div class="px-4 py-2 bg-slate-900 border-t border-slate-800/80 flex flex-wrap gap-2 text-[11px]">
+                    <span class="text-slate-500">Comandos:</span>
+                    <button onclick="execCmd('help')" class="text-sky-400 hover:underline">help</button>
+                    <button onclick="execCmd('skills')" class="text-sky-400 hover:underline">skills</button>
+                    <button onclick="execCmd('projects')" class="text-sky-400 hover:underline">projects</button>
+                    <button onclick="execCmd('cv')" class="text-sky-400 hover:underline">cv</button>
+                    <button onclick="execCmd('contact')" class="text-sky-400 hover:underline">contact</button>
+                    <button onclick="execCmd('clear')" class="text-slate-400 hover:underline">clear</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO CURRÍCULO FORMATADO (A4) COM IMPRESSÃO LIMPA -->
+        <section id="curriculo-secao" class="scroll-mt-20 pt-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div class="border-l-4 border-brand-500 pl-3">
+                    <h2 class="text-xs uppercase font-mono tracking-wider text-brand-500 font-bold">Documento Oficial</h2>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Currículo Formatado (Folha A4)</h3>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="imprimirCurriculo()" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-xs shadow-md transition flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-print"></i>
+                        <span>Imprimir / Salvar como PDF</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dica para o usuário -->
+            <div class="p-3 mb-6 bg-blue-50 dark:bg-darkbg-card border border-blue-200 dark:border-blue-900/40 rounded-xl text-xs text-blue-800 dark:text-blue-300 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-base"></i>
+                <span>Ao clicar em <strong>"Imprimir / Salvar como PDF"</strong>, a janela de impressão abrirá diretamente focada na folha do currículo sem elementos do site. Basta selecionar <em>"Salvar como PDF"</em>.</span>
+            </div>
+
+            <!-- CONTAINER DA FOLHA A4 (Elemento alvo de visualização e do print) -->
+            <div class="overflow-x-auto pb-6">
+                <article id="curriculo-a4" class="a4-container text-[12px] leading-normal">
+                    
+                    <!-- Cabeçalho do CV -->
+                    <header class="border-b-2 border-sky-600 pb-3 mb-3">
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 uppercase tracking-tight mb-0.5">José Celso de Lucas</h1>
+                        <div class="text-sky-700 font-bold text-xs mb-2">Desenvolvedor de Software | Análise e Desenvolvimento de Sistemas</div>
+                        <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-600 font-medium">
+                            <span>📍 Arujá - SP</span>
+                            <span>📞 (11) 94505-2141</span>
+                            <span>✉️ josecelsodelucas2@gmail.com</span>
+                            <span>💻 github.com/josecelsodelucas2-lgtm</span>
+                            <span>🔗 linkedin.com/in/jose-celso-lucas</span>
+                        </div>
+                    </header>
+
+                    <!-- Apresentação Profissional & Objetivo -->
+                    <section class="mb-3">
+                        <div class="font-bold uppercase tracking-wider text-[11px] text-slate-900 border-b border-slate-300 pb-0.5 mb-1 flex items-center gap-1.5">
+                            <span class="w-1.5 h-2.5 bg-sky-600 inline-block"></span> Apresentação Profissional &amp; Objetivo
+                        </div>
+                        <p class="text-slate-700 text-justify text-[11.5px] leading-relaxed">
+                            Estudante de Análise e Desenvolvimento de Sistemas com conhecimentos em desenvolvimento de software, estruturas de dados, programação orientada a objetos e ambiente web. Experiência prática na construção de aplicações e dashboards utilizando Java, Python, JavaScript e SQL. Profissional com histórico de rigor operacional, organização e capacidade analítica comprovada em rotinas logísticas e industriais. Busco oportunidade de <strong>Estágio</strong> ou posição <strong>Júnior</strong> em Desenvolvimento de Software, Suporte Técnico ou Análise de Dados.
+                        </p>
+                    </section>
+
+                    <!-- Conhecimentos Técnicos -->
+                    <section class="mb-3">
+                        <div class="font-bold uppercase tracking-wider text-[11px] text-slate-900 border-b border-slate-300 pb-0.5 mb-1.5 flex items-center gap-1.5">
+                            <span class="w-1.5 h-2.5 bg-sky-600 inline-block"></span> Conhecimentos Técnicos
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-[11px] bg-slate-50 p-2 rounded border border-slate-200">
+                            <div><strong>Linguagens:</strong> Java (POO), Python, JavaScript, SQL, C/C++</div>
+                            <div><strong>Desenvolvimento Web:</strong> HTML5, CSS3, Tailwind CSS, DOM Manipulation</div>
+                            <div><strong>Bancos de Dados:</strong> MySQL, Consultas Relacionais SQL, Access</div>
+                            <div><strong>Ferramentas & Cloud:</strong> Git, GitHub, Power BI, Excel, Azure AI</div>
+                        </div>
+                    </section>
+
+                    <!-- Projetos em Destaque -->
+                    <section class="mb-3">
+                        <div class="font-bold uppercase tracking-wider text-[11px] text-slate-900 border-b border-slate-300 pb-0.5 mb-1.5 flex items-center gap-1.5">
+                            <span class="w-1.5 h-2.5 bg-sky-600 inline-block"></span> Projetos em Destaque
+                        </div>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="flex justify-between items-baseline font-bold text-slate-900 text-[11.5px]">
+                                    <span>NexusSales AI — Executive Sales Dashboard</span>
+                                    <span class="text-[10px] text-slate-500 font-normal">GitHub: josecelsodelucas2-lgtm</span>
+                                </div>
+                                <div class="text-[11px] text-slate-700">Dashboard executivo com consolidação de faturamento, ticket médio e gráficos interativos orientados à tomada de decisão. (HTML5, Tailwind CSS, JavaScript).</div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-baseline font-bold text-slate-900 text-[11.5px]">
+                                    <span>VendaFácil PDV — Sistema de Gestão de Vendas</span>
+                                    <span class="text-[10px] text-slate-500 font-normal">GitHub: josecelsodelucas2-lgtm</span>
+                                </div>
+                                <div class="text-[11px] text-slate-700">Aplicação de ponto de venda com cadastro de produtos, cálculo instantâneo de troco e persistência de dados. (Java, Lógica de Negócios, JavaScript, SQL).</div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-baseline font-bold text-slate-900 text-[11.5px]">
+                                    <span>Simulador Coletor WMS (LogTech)</span>
+                                    <span class="text-[10px] text-slate-500 font-normal">GitHub: josecelsodelucas2-lgtm</span>
+                                </div>
+                                <div class="text-[11px] text-slate-700">Emulador de coletor RF para separação e validação de conferência de mercadorias em tempo real. (HTML5, JavaScript, Regras de Armazém).</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Layout 2 Colunas: Histórico e Educação -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Coluna 1: Experiência -->
+                        <section>
+                            <div class="font-bold uppercase tracking-wider text-[11px] text-slate-900 border-b border-slate-300 pb-0.5 mb-1.5 flex items-center gap-1.5">
+                                <span class="w-1.5 h-2.5 bg-sky-600 inline-block"></span> Experiência Profissional
+                            </div>
+                            <div class="space-y-2 text-[11px]">
+                                <div>
+                                    <div class="flex justify-between font-bold text-slate-900">
+                                        <span>Assaí Atacadista</span>
+                                        <span class="font-normal text-slate-500">Dez/2024 – Atual</span>
+                                    </div>
+                                    <div class="text-sky-800 font-semibold text-[10.5px]">Separador / Operador de Logística</div>
+                                    <div class="text-slate-600">Separação, conferência de estoque e cumprimento de metas operacionais.</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between font-bold text-slate-900">
+                                        <span>Lojas Renner S.A.</span>
+                                        <span class="font-normal text-slate-500">Set/2018 – Abr/2024</span>
+                                    </div>
+                                    <div class="text-sky-800 font-semibold text-[10.5px]">Auxiliar de Logística (E-commerce)</div>
+                                    <div class="text-slate-600">Expedição Youcom, auditoria de cargas e planilhas de rastreio.</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between font-bold text-slate-900">
+                                        <span>Tower Automotive</span>
+                                        <span class="font-normal text-slate-500">Dez/2009 – Jun/2014</span>
+                                    </div>
+                                    <div class="text-sky-800 font-semibold text-[10.5px]">Operador de Produção Industrial</div>
+                                    <div class="text-slate-600">Células automatizadas de solda robótica e controle em expedição.</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Coluna 2: Formação e Certificados -->
+                        <section>
+                            <div class="font-bold uppercase tracking-wider text-[11px] text-slate-900 border-b border-slate-300 pb-0.5 mb-1.5 flex items-center gap-1.5">
+                                <span class="w-1.5 h-2.5 bg-sky-600 inline-block"></span> Formação &amp; Cursos
+                            </div>
+                            <div class="text-[11px] mb-2">
+                                <div class="font-bold text-slate-900">Análise e Desenvolvimento de Sistemas</div>
+                                <div class="text-slate-600">Faculdade Anhanguera (EAD) &bull; Conclusão: 12/2027</div>
+                            </div>
+                            <div class="font-bold text-slate-900 text-[10.5px] mb-0.5">Certificações Relevantes:</div>
+                            <ul class="list-disc list-inside space-y-0.5 text-[10.5px] text-slate-700">
+                                <li>Microsoft Azure AI Fundamentals</li>
+                                <li>Inteligência Artificial Generativa</li>
+                                <li>Desenvolvimento Web (HTML, CSS, JS)</li>
+                                <li>Fundamentos de Java & POO</li>
+                                <li>Administração de Banco de Dados</li>
+                                <li>Excel para Análise de Dados</li>
+                            </ul>
+                            <div class="mt-2 text-[10.5px]">
+                                <strong>Idiomas:</strong> Português (Nativo) | Inglês (Leitura Técnica)
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Rodapé do CV A4 -->
+                    <footer class="mt-4 pt-2 border-t border-slate-200 flex justify-between text-[10px] text-slate-500">
+                        <span>José Celso de Lucas &bull; Currículo Profissional</span>
+                        <span>Arujá - SP &bull; Atualizado</span>
+                    </footer>
+                </article>
+            </div>
+        </section>
+
+        <!-- CONTATO -->
+        <section id="contato" class="scroll-mt-20">
+            <div class="border-l-4 border-brand-500 pl-3 mb-6">
+                <h2 class="text-xs uppercase font-mono tracking-wider text-brand-500 font-bold">Comunicação</h2>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Vamos Conversar?</h3>
+            </div>
+
+            <div class="bg-white dark:bg-darkbg-card border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="mailto:josecelsodelucas2@gmail.com" class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-brand-500 transition flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-50 dark:bg-darkbg-lighter text-brand-500 flex items-center justify-center text-lg">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <div class="text-xs text-slate-500">E-mail</div>
+                            <div class="text-xs sm:text-sm font-semibold truncate">josecelsodelucas2@gmail.com</div>
+                        </div>
+                    </a>
+
+                    <a href="tel:11945052141" class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-brand-500 transition flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-50 dark:bg-darkbg-lighter text-brand-500 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-500">Telefone / WhatsApp</div>
+                            <div class="text-xs sm:text-sm font-semibold">(11) 94505-2141</div>
+                        </div>
+                    </a>
+
+                    <a href="https://linkedin.com/in/jose-celso-lucas-50b063207" target="_blank" rel="noopener" class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-brand-500 transition flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-50 dark:bg-darkbg-lighter text-brand-500 flex items-center justify-center text-lg">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-500">LinkedIn</div>
+                            <div class="text-xs sm:text-sm font-semibold">jose-celso-lucas</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ DO SITE -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>José Celso de Lucas &bull; Portfólio Interativo &amp; Currículo</p>
+    </footer>
+
+    <!-- JAVASCRIPT ROBUSTO (SEM DEPENDÊNCIAS FRÁGEIS) -->
+    <script>
+        // 1. Tema Claro / Escuro com persistência no LocalStorage
+        const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const root = document.documentElement;
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                root.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun text-yellow-400';
+            } else {
+                root.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-moon text-slate-600';
+            }
+        }
+
+        const savedTheme = localStorage.getItem('site_theme');
+        applyTheme(savedTheme !== 'light');
+
+        themeBtn.addEventListener('click', () => {
+            const isCurrentlyDark = root.classList.contains('dark');
+            const newIsDark = !isCurrentlyDark;
+            applyTheme(newIsDark);
+            localStorage.setItem('site_theme', newIsDark ? 'dark' : 'light');
+        });
+
+        // 2. Menu Mobile Drawer
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+        });
+
+        mobileDrawer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+            });
+        });
+
+        // 3. Função de Impressão Direta e Infalível
+        function imprimirCurriculo() {
+            // Rola suavemente até o currículo para dar feedback visual e dispara a impressão limpa
+            const curriculoElem = document.getElementById('curriculo-a4');
+            if (curriculoElem) {
+                curriculoElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            setTimeout(() => {
+                window.print();
+            }, 300);
+        }
+
+        // 4. Terminal CLI Interativo
+        const cliOutput = document.getElementById('cliOutput');
+        const cliForm = document.getElementById('cliForm');
+        const cliInput = document.getElementById('cliInput');
+
+        const commands = {
+            help: `
+                <div class="text-sky-300 font-bold">Comandos disponíveis:</div>
+                <div>- <span class="text-yellow-400">skills</span>: Lista as principais linguagens e tecnologias</div>
+                <div>- <span class="text-yellow-400">projects</span>: Exibe os projetos em destaque</div>
+                <div>- <span class="text-yellow-400">cv</span>: Imprime / Salva o currículo em PDF</div>
+                <div>- <span class="text-yellow-400">contact</span>: Informações para contato</div>
+                <div>- <span class="text-yellow-400">clear</span>: Limpa a tela do terminal</div>
+            `,
+            skills: `
+                <div class="text-emerald-400 font-bold">Conhecimentos Técnicos:</div>
+                <div>Java, Python, JavaScript, C/C++, SQL, HTML5, CSS3, Tailwind CSS, MySQL, Power BI, Git/GitHub, Azure AI</div>
+            `,
+            projects: `
+                <div class="text-cyan-400 font-bold">Projetos:</div>
+                <div>1. NexusSales AI (Dashboard Executivo)</div>
+                <div>2. VendaFácil PDV (Frente de Caixa)</div>
+                <div>3. Simulador Coletor WMS (Logística)</div>
+            `,
+            cv: `
+                <div class="text-brand-400">Disparando visualização e impressão do currículo...</div>
+            `,
+            contact: `
+                <div>E-mail: josecelsodelucas2@gmail.com</div>
+                <div>WhatsApp: (11) 94505-2141</div>
+                <div>GitHub: josecelsodelucas2-lgtm</div>
+            `
+        };
+
+        function execCmd(cmd) {
+            cmd = cmd.trim().toLowerCase();
+            const logLine = document.createElement('div');
+            logLine.innerHTML = `<span class="text-emerald-400 font-bold">jose@portfolio:~$</span> ${cmd}`;
+            cliOutput.appendChild(logLine);
+
+            if (cmd === 'clear') {
+                cliOutput.innerHTML = '';
+            } else if (cmd === 'cv') {
+                const response = document.createElement('div');
+                response.innerHTML = commands.cv;
+                cliOutput.appendChild(response);
+                imprimirCurriculo();
+            } else if (commands[cmd]) {
+                const response = document.createElement('div');
+                response.innerHTML = commands[cmd];
+                cliOutput.appendChild(response);
+            } else {
+                const err = document.createElement('div');
+                err.className = 'text-red-400';
+                err.textContent = `Comando não encontrado: "${cmd}". Digite 'help'.`;
+                cliOutput.appendChild(err);
+            }
+            cliOutput.scrollTop = cliOutput.scrollHeight;
+        }
+
+        cliForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (cliInput.value.trim()) {
+                execCmd(cliInput.value);
+                cliInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
