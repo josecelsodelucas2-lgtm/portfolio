@@ -1,7 +1,68 @@
-🚀 José Celso de LucasDesenvolvedor de Software | Estudante de Análise e Desenvolvimento de Sistemas🌐 Acessar Demonstração Online • 📄 Ver Currículo • 💻 Projetos • 📫 Contato📌 Sobre MimEstudante de Análise e Desenvolvimento de Sistemas (Faculdade Anhanguera, previsão 12/2027) com formação prática em desenvolvimento orientado a objetos, arquitetura web, manipulação de bases de dados relacionais e visualização analítica de dados.Possuo histórico consistente de disciplina, atenção a detalhes e gestão operacional consolidado em operações de logística e produção industrial (Assaí Atacadista, Lojas Renner e Tower Automotive), competências transferíveis essenciais para a entrega ágil e resiliente de software.🎯 Foco atual: Desenvolvimento Backend (Java/Python) e Frontend (JavaScript/HTML/CSS/Tailwind).📍 Localização: Arujá - SP, Brasil.💼 Disponibilidade: Estágio e posições Júnior em Desenvolvimento de Software, Suporte Técnico ou Análise de Dados.🛠️ Tecnologias & HabilidadesCategoriaTecnologias & FerramentasLinguagens    Frontend  Banco de Dados Cloud, IA & Tools    💻 Projetos em Destaque1. 📊 NexusSales AI — Executive Sales DashboardDescrição: Painel executivo desenvolvido para consolidação e visualização analítica de métricas de vendas, faturamento, ticket médio e margem operacional com filtros dinâmicos.Stack: HTML5, Tailwind CSS, JavaScript (ES6+), Data Analytics.Repositório: josecelsodelucas2-lgtm2. 🛒 VendaFácil PDV — Ponto de Venda & CaixaDescrição: Aplicação completa de ponto de venda contemplando cadastro de produtos, processamento de carrinho, cálculo em tempo real de troco, histórico de transações e regras de negócio.Stack: Java, Lógica de Negócios (POO), JavaScript, SQL.Repositório: josecelsodelucas2-lgtm3. 📦 Simulador Coletor WMS (LogTech)Descrição: Aplicação inspirada em rotinas logísticas para simulação de fluxo operacional de armazém: validação por código de barras, separação guiada (picking) e conferência de expedição.Stack: HTML5, CSS3, JavaScript, Regras Logísticas.Repositório: josecelsodelucas2-lgtm✨ Recursos do Portfólio Interativo🌓 Dark / Light Mode: Alternância dinâmica de tema com persistência local (localStorage).🖥️ Terminal CLI Interativo: Permite aos recrutadores navegar via linha de comando (help, skills, projects, cv, contact).🖨️ Impressão Limpa em Folha A4: O botão nativo aciona a impressão já calibrada via @media print, gerando um PDF com diagramação executiva de uma página sem elementos de navegação ou fundos indesejados.📱 Design 100% Responsivo: Otimizado para smartphones, tablets e monitores ultrawide.⚡ Comandos do Terminal EmbutidoNo terminal da aplicação web, você pode testar:jose@portfolio:~$ help        # Lista todos os comandos disponíveis
-jose@portfolio:~$ skills      # Detalha a stack tecnológica
-jose@portfolio:~$ projects    # Resume os principais projetos construídos
-jose@portfolio:~$ cv          # Aciona a visualização e impressão do currículo
-jose@portfolio:~$ contact     # Exibe os canais de contato direto
-jose@portfolio:~$ clear       # Limpa o histórico de comandos
-🎓 Formação & CertificaçõesTecnólogo em Análise e Desenvolvimento de Sistemas — Faculdade Anhanguera (EAD) | Previsão: Dez/2027Microsoft Certified: Azure AI FundamentalsInteligência Artificial GenerativaDesenvolvimento Web com HTML5, CSS3 e JavaScriptFundamentos de Java & Programação Orientada a ObjetosAdministração de Banco de Dados & SQLExcel para Análise de Dados📫 ContatoCanalInformaçãoE-mailjosecelsodelucas2@gmail.comLinkedInlinkedin.com/in/jose-celso-lucas-50b063207GitHubgithub.com/josecelsodelucas2-lgtmWhatsApp / Telefone(11) 94505-2141LocalizaçãoArujá - SP, Brasil
+# 🚀 José Celso de Lucas
+
+**Desenvolvedor de Software | Estudante de Análise e Desenvolvimento de Sistemas**
+
+[🌐 Aceder Demonstração Online](https://josecelsodelucas2-lgtm.github.io/portfolio/) • [📄 Ver Currículo](#-formação--certificações) • [💻 Projetos](#-projetos-em-destaque) • [📫 Contacto](#-contacto)
+
+---
+
+## 📌 Sobre Mim
+
+Estudante de **Análise e Desenvolvimento de Sistemas** (Faculdade Anhanguera, conclusão prevista para 12/2027) com foco em desenvolvimento orientado a objetos, arquitetura web, bases de dados relacionais e visualização de dados.
+
+Possuo experiência sólida em rigor operacional, resolução de problemas e processos logísticos/industriais (*Assaí Atacadista*, *Lojas Renner* e *Tower Automotive*), competências que aplico na construção de código limpo, organizado e resiliente.
+
+* **Foco atual:** Backend (Java / Python) e Frontend (JavaScript / HTML5 / CSS3 / Tailwind)
+* **Localização:** Arujá – SP, Brasil
+* **Objetivo:** Estágio ou posição Júnior em Desenvolvimento de Software, Suporte Técnico ou Análise de Dados
+
+---
+
+## 🛠️ Tecnologias & Habilidades
+
+| Categoria | Tecnologias & Ferramentas |
+| :--- | :--- |
+| **Linguagens** | Java, Python, JavaScript (ES6+), C/C++, SQL |
+| **Frontend** | HTML5, CSS3, Tailwind CSS, Web Design Responsivo |
+| **Bases de Dados** | MySQL, SQL Server, Microsoft Access |
+| **Cloud, IA & Ferramentas** | Microsoft Azure AI, Git, GitHub, Power BI, Excel Avançado |
+
+---
+
+## 💻 Projetos em Destaque
+
+### 1. 📊 NexusSales AI — Executive Sales Dashboard
+Painel executivo focado em métricas comerciais, projeção de vendas e margem operacional com filtros interativos.
+* **Stack:** HTML5, Tailwind CSS, JavaScript (ES6+), Chart.js
+* **Repositório:** [josecelsodelucas2-lgtm/portfolio](https://github.com/josecelsodelucas2-lgtm/portfolio)
+
+### 2. 🛒 VendaFácil PDV — Ponto de Venda & Caixa
+Aplicação completa de ponto de venda contemplando catálogo de artigos, cálculo dinâmico de troco e persistência local.
+* **Stack:** JavaScript, Lógica POO, LocalStorage, HTML5/CSS3
+* **Repositório:** [josecelsodelucas2-lgtm/portfolio](https://github.com/josecelsodelucas2-lgtm/portfolio)
+
+### 3. 📦 Simulador Coletor WMS (LogTech)
+Simulador interativo para rotinas de armazém: validação por código de barras, picking guiado e auditoria de expedição.
+* **Stack:** HTML5, CSS3, JavaScript, Regras Logísticas
+
+---
+
+## 🎓 Formação & Certificações
+
+* **Tecnólogo em Análise e Desenvolvimento de Sistemas** — Faculdade Anhanguera (Previsão: Dez/2027)
+* **Microsoft Certified:** Azure AI Fundamentals
+* **Inteligência Artificial Generativa** & Engenharia de Prompts
+* **Desenvolvimento Web Moderno** (HTML5, CSS3, JavaScript)
+* **Fundamentos de Java & POO** — Programação Orientada a Objetos
+* **Administração de Bases de Dados & SQL**
+* **Excel para Análise de Dados & Métricas Operacionais**
+
+---
+
+## 📱 Contacto
+
+* **E-mail:** [josecelsodelucas2@gmail.com](mailto:josecelsodelucas2@gmail.com)
+* **LinkedIn:** [linkedin.com/in/jose-celso-lucas-50b063207](https://www.linkedin.com/in/jose-celso-lucas-50b063207)
+* **GitHub:** [github.com/josecelsodelucas2-lgtm](https://github.com/josecelsodelucas2-lgtm)
+* **Telefone / WhatsApp:** (11) 94505-2141
+* **Localização:** Arujá – SP, Brasil
